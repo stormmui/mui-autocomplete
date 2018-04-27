@@ -5,12 +5,16 @@
   "version": "0.0.1",
   "license": "MIT",
   "dependencies": {
-    "react-select": "latest",
     "react-dom": "latest",
     "react": "latest",
     "prop-types": "latest",
     "material-ui": "next",
-    "@material-ui/icons": "latest"
+    "@material-ui/icons": "latest",
+    "keycode": "latest",
+    "downshift": "latest",
+    "react-autosuggest": "latest",
+    "autosuggest-highlight": "latest",
+    "react-select": "latest"
   },
   "devDependencies": {
     "react-scripts": "1.0.0"
