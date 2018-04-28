@@ -24,7 +24,7 @@ const repoMap = {
   repo4: "ghme.json"
 };
 
-const target_location = "repo2";
+const target_location = "repo1";
 
 function renderInput(inputProps) {
   const { classes, ref, ...other } = inputProps;
