@@ -17,6 +17,16 @@ const suggestions = [
   { label: 'Brazil' },
 ];
 
+const template =
+  "https://raw.githubusercontent.com/stormasm/mui-demos/master/table/src/data/";
+
+const repoMap = {
+  repo1: "html5-node-diagram.json",
+  repo2: "ivy.json",
+  repo3: "nodejs-sandboxed-fs.json",
+  repo4: "ghme.json"
+};
+
 function renderInput(inputProps) {
   const { classes, ref, ...other } = inputProps;
 
@@ -114,10 +124,19 @@ const styles = theme => ({
 });
 
 class IntegrationAutosuggest extends React.Component {
-  state = {
-    value: '',
-    suggestions: [],
-  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: '',
+      suggestions: [],
+      data: {},
+      isLoading: false,
+      error: null,
+      repoName: repoMap["repo3"]
+    };
+  }
 
   handleSuggestionsFetchRequested = ({ value }) => {
     this.setState({
@@ -136,6 +155,46 @@ class IntegrationAutosuggest extends React.Component {
       value: newValue,
     });
   };
+
+  componentWillReceiveProps(nextProps) {
+    const url = template + repoMap[nextProps.match.params.repo];
+
+    this.setState({ isLoading: true });
+    this.setState({ repoName: repoMap["repo3"] });
+
+    fetch(url)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error(
+            "Sorry, but something went wrong in demo-github-json..."
+          );
+        }
+      })
+      .then(data => this.setState({ data, isLoading: false }))
+      .catch(error => this.setState({ error, isLoading: false }));
+  }
+
+  componentDidMount() {
+    this.setState({ isLoading: true });
+    this.setState({ repoName: repoMap["repo3"] });
+
+    const url = template + this.state.repoName;
+
+    fetch(url)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error(
+            "Sorry, but something went wrong in demo-github-json..."
+          );
+        }
+      })
+      .then(data => this.setState({ data, isLoading: false }))
+      .catch(error => this.setState({ error, isLoading: false }));
+  }
 
   render() {
     const { classes } = this.props;
