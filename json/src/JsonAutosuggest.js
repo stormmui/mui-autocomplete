@@ -14,17 +14,6 @@ import Table, {
 } from "material-ui/Table";
 import { withStyles } from "material-ui/styles";
 
-/*
-const suggestions = [
-  { label: "Afghanistan" },
-  { label: "Aland Islands" },
-  { label: "Albania" },
-  { label: "Botswana" },
-  { label: "Bouvet Island" },
-  { label: "Brazil" }
-];
-*/
-
 const template =
   "https://raw.githubusercontent.com/stormasm/mui-demos/master/table/src/data/";
 
@@ -127,29 +116,19 @@ class IntegrationAutosuggest extends React.Component {
   }
 
   buildSuggestions(value) {
-
+    // In the future we may only grab locations with the value
     const sugary = [];
     const sug = this.state.data.hits;
-
-    console.log("Building suggestion value ", value);
-    console.log(sug);
-    sug.map((key, index) => (
-      console.log(index, key.location)
-    ));
-
-    sug.forEach(function(item, index){
-      console.log(index, item.location);
+    sug.forEach(function(item, index) {
       let obj = {};
       obj.label = item.location;
       sugary.push(obj);
     });
-
     return sugary;
   }
 
   getSuggestions(value) {
-    const suggestions = this.buildSuggestions(value);
-    //console.log(ss);
+    const mysuggestions = this.buildSuggestions(value);
 
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
@@ -157,7 +136,7 @@ class IntegrationAutosuggest extends React.Component {
 
     return inputLength === 0
       ? []
-      : suggestions.filter(suggestion => {
+      : mysuggestions.filter(suggestion => {
           const keep =
             count < 5 &&
             suggestion.label.toLowerCase().slice(0, inputLength) === inputValue;
@@ -260,7 +239,7 @@ class IntegrationAutosuggest extends React.Component {
             renderSuggestion={renderSuggestion}
             inputProps={{
               classes,
-              placeholder: "Search a country (start with a)",
+              placeholder: "Search a location starting with the first letter",
               value: this.state.value,
               onChange: this.handleChange
             }}
