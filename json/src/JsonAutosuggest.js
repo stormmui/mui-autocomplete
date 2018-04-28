@@ -15,7 +15,7 @@ import Table, {
 import { withStyles } from "material-ui/styles";
 
 const template =
-  "https://raw.githubusercontent.com/stormasm/mui-demos/master/table/src/data/";
+  "https://raw.githubusercontent.com/stormasm/mui-card-file/master/src/data/repos/";
 
 const repoMap = {
   repo1: "html5-node-diagram.json",
@@ -24,7 +24,7 @@ const repoMap = {
   repo4: "ghme.json"
 };
 
-const target_location = "repo3";
+const target_location = "repo2";
 
 function renderInput(inputProps) {
   const { classes, ref, ...other } = inputProps;
