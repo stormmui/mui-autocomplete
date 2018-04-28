@@ -1,32 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Autosuggest from 'react-autosuggest';
-import match from 'autosuggest-highlight/match';
-import parse from 'autosuggest-highlight/parse';
-import TextField from 'material-ui/TextField';
-import Paper from 'material-ui/Paper';
-import { MenuItem } from 'material-ui/Menu';
-
-
+import React from "react";
+import PropTypes from "prop-types";
+import Autosuggest from "react-autosuggest";
+import match from "autosuggest-highlight/match";
+import parse from "autosuggest-highlight/parse";
+import TextField from "material-ui/TextField";
+import Paper from "material-ui/Paper";
+import { MenuItem } from "material-ui/Menu";
 import Table, {
   TableBody,
   TableCell,
   TableHead,
   TableRow
 } from "material-ui/Table";
-
-
-
-
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from "material-ui/styles";
 
 const suggestions = [
-  { label: 'Afghanistan' },
-  { label: 'Aland Islands' },
-  { label: 'Albania' },
-  { label: 'Botswana' },
-  { label: 'Bouvet Island' },
-  { label: 'Brazil' },
+  { label: "Afghanistan" },
+  { label: "Aland Islands" },
+  { label: "Albania" },
+  { label: "Botswana" },
+  { label: "Bouvet Island" },
+  { label: "Brazil" }
 ];
 
 const template =
@@ -48,9 +42,9 @@ function renderInput(inputProps) {
       InputProps={{
         inputRef: ref,
         classes: {
-          input: classes.input,
+          input: classes.input
         },
-        ...other,
+        ...other
       }}
     />
   );
@@ -102,7 +96,8 @@ function getSuggestions(value) {
     ? []
     : suggestions.filter(suggestion => {
         const keep =
-          count < 5 && suggestion.label.toLowerCase().slice(0, inputLength) === inputValue;
+          count < 5 &&
+          suggestion.label.toLowerCase().slice(0, inputLength) === inputValue;
 
         if (keep) {
           count += 1;
@@ -115,33 +110,32 @@ function getSuggestions(value) {
 const styles = theme => ({
   container: {
     flexGrow: 1,
-    position: 'relative',
-    height: 250,
+    position: "relative",
+    height: 250
   },
   suggestionsContainerOpen: {
-    position: 'absolute',
+    position: "absolute",
     zIndex: 1,
     marginTop: theme.spacing.unit,
     left: 0,
-    right: 0,
+    right: 0
   },
   suggestion: {
-    display: 'block',
+    display: "block"
   },
   suggestionsList: {
     margin: 0,
     padding: 0,
-    listStyleType: 'none',
-  },
+    listStyleType: "none"
+  }
 });
 
 class IntegrationAutosuggest extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      value: '',
+      value: "",
       suggestions: [],
       data: {},
       isLoading: false,
@@ -152,19 +146,19 @@ class IntegrationAutosuggest extends React.Component {
 
   handleSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      suggestions: getSuggestions(value),
+      suggestions: getSuggestions(value)
     });
   };
 
   handleSuggestionsClearRequested = () => {
     this.setState({
-      suggestions: [],
+      suggestions: []
     });
   };
 
   handleChange = (event, { newValue }) => {
     this.setState({
-      value: newValue,
+      value: newValue
     });
   };
 
@@ -223,70 +217,64 @@ class IntegrationAutosuggest extends React.Component {
 
     return (
       <div>
-
-
-
-
-
-      <div>
-      <Autosuggest
-        theme={{
-          container: classes.container,
-          suggestionsContainerOpen: classes.suggestionsContainerOpen,
-          suggestionsList: classes.suggestionsList,
-          suggestion: classes.suggestion,
-        }}
-        renderInputComponent={renderInput}
-        suggestions={this.state.suggestions}
-        onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
-        renderSuggestionsContainer={renderSuggestionsContainer}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={{
-          classes,
-          placeholder: 'Search a country (start with a)',
-          value: this.state.value,
-          onChange: this.handleChange,
-        }}
-      />
-      </div>
-
-      <div>
-      <Paper className={classes.root}>
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <TableCell>login</TableCell>
-              <TableCell>name</TableCell>
-              <TableCell>location</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {hits.map((key, index) => {
-              return (
-                <TableRow key={index}>
-                  <TableCell>
-                    <a href={"https://github.com/" + key.login}>{key.login}</a>
-                  </TableCell>
-                  <TableCell>{key.name}</TableCell>
-                  <TableCell>{key.location}</TableCell>
+        <div>
+          <Autosuggest
+            theme={{
+              container: classes.container,
+              suggestionsContainerOpen: classes.suggestionsContainerOpen,
+              suggestionsList: classes.suggestionsList,
+              suggestion: classes.suggestion
+            }}
+            renderInputComponent={renderInput}
+            suggestions={this.state.suggestions}
+            onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
+            renderSuggestionsContainer={renderSuggestionsContainer}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+            inputProps={{
+              classes,
+              placeholder: "Search a country (start with a)",
+              value: this.state.value,
+              onChange: this.handleChange
+            }}
+          />
+        </div>
+        <div>
+          <Paper className={classes.root}>
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>login</TableCell>
+                  <TableCell>name</TableCell>
+                  <TableCell>location</TableCell>
                 </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </Paper>
-    </div>
-
-
+              </TableHead>
+              <TableBody>
+                {hits.map((key, index) => {
+                  return (
+                    <TableRow key={index}>
+                      <TableCell>
+                        <a href={"https://github.com/" + key.login}>
+                          {key.login}
+                        </a>
+                      </TableCell>
+                      <TableCell>{key.name}</TableCell>
+                      <TableCell>{key.location}</TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </Paper>
+        </div>
       </div>
     );
   }
 }
 
 IntegrationAutosuggest.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(IntegrationAutosuggest);
