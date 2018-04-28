@@ -6,6 +6,18 @@ import parse from 'autosuggest-highlight/parse';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import { MenuItem } from 'material-ui/Menu';
+
+
+import Table, {
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow
+} from "material-ui/Table";
+
+
+
+
 import { withStyles } from 'material-ui/styles';
 
 const suggestions = [
@@ -134,7 +146,7 @@ class IntegrationAutosuggest extends React.Component {
       data: {},
       isLoading: false,
       error: null,
-      repoName: repoMap["repo3"]
+      repoName: repoMap["repo4"]
     };
   }
 
@@ -199,7 +211,24 @@ class IntegrationAutosuggest extends React.Component {
   render() {
     const { classes } = this.props;
 
+    const hits = this.state.data.hits || [];
+
+    if (this.state.error) {
+      return <p>{this.state.error.message}</p>;
+    }
+
+    if (this.state.isLoading) {
+      return <p>Loading ...</p>;
+    }
+
     return (
+      <div>
+
+
+
+
+
+      <div>
       <Autosuggest
         theme={{
           container: classes.container,
@@ -221,6 +250,37 @@ class IntegrationAutosuggest extends React.Component {
           onChange: this.handleChange,
         }}
       />
+      </div>
+
+      <div>
+      <Paper className={classes.root}>
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow>
+              <TableCell>login</TableCell>
+              <TableCell>name</TableCell>
+              <TableCell>location</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {hits.map((key, index) => {
+              return (
+                <TableRow key={index}>
+                  <TableCell>
+                    <a href={"https://github.com/" + key.login}>{key.login}</a>
+                  </TableCell>
+                  <TableCell>{key.name}</TableCell>
+                  <TableCell>{key.location}</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </Paper>
+    </div>
+
+
+      </div>
     );
   }
 }
