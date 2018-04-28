@@ -24,6 +24,8 @@ const repoMap = {
   repo4: "ghme.json"
 };
 
+const target_location = "repo4";
+
 function renderInput(inputProps) {
   const { classes, ref, ...other } = inputProps;
 
@@ -111,7 +113,7 @@ class IntegrationAutosuggest extends React.Component {
       data: {},
       isLoading: false,
       error: null,
-      repoName: repoMap["repo4"]
+      repoName: repoMap[target_location]
     };
   }
 
@@ -171,7 +173,7 @@ class IntegrationAutosuggest extends React.Component {
     const url = template + repoMap[nextProps.match.params.repo];
 
     this.setState({ isLoading: true });
-    this.setState({ repoName: repoMap["repo4"] });
+    this.setState({ repoName: repoMap[target_location] });
 
     fetch(url)
       .then(response => {
@@ -189,7 +191,7 @@ class IntegrationAutosuggest extends React.Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    this.setState({ repoName: repoMap["repo4"] });
+    this.setState({ repoName: repoMap[target_location] });
 
     const url = template + this.state.repoName;
 
