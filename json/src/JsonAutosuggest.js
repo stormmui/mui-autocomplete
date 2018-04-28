@@ -24,7 +24,7 @@ const repoMap = {
   repo4: "ghme.json"
 };
 
-const target_location = "repo4";
+const target_location = "repo3";
 
 function renderInput(inputProps) {
   const { classes, ref, ...other } = inputProps;
@@ -124,7 +124,9 @@ class IntegrationAutosuggest extends React.Component {
     sug.forEach(function(item, index) {
       let obj = {};
       obj.label = item.location;
-      sugary.push(obj);
+      if (obj.label != null) {
+        sugary.push(obj);
+      }
     });
     return sugary;
   }
