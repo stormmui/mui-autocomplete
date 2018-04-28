@@ -87,26 +87,6 @@ function getSuggestionValue(suggestion) {
   return suggestion.label;
 }
 
-function getSuggestions(value) {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
-  let count = 0;
-
-  return inputLength === 0
-    ? []
-    : suggestions.filter(suggestion => {
-        const keep =
-          count < 5 &&
-          suggestion.label.toLowerCase().slice(0, inputLength) === inputValue;
-
-        if (keep) {
-          count += 1;
-        }
-
-        return keep;
-      });
-}
-
 const styles = theme => ({
   container: {
     flexGrow: 1,
@@ -144,9 +124,36 @@ class IntegrationAutosuggest extends React.Component {
     };
   }
 
+  buildSuggestions() {
+    console.log("Building suggestion array");
+    console.log(this.state.data.hits);
+  }
+
+  getSuggestions(value) {
+    this.buildSuggestions();
+
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+    let count = 0;
+
+    return inputLength === 0
+      ? []
+      : suggestions.filter(suggestion => {
+          const keep =
+            count < 5 &&
+            suggestion.label.toLowerCase().slice(0, inputLength) === inputValue;
+
+          if (keep) {
+            count += 1;
+          }
+
+          return keep;
+        });
+  }
+
   handleSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      suggestions: getSuggestions(value)
+      suggestions: this.getSuggestions(value)
     });
   };
 
@@ -166,7 +173,7 @@ class IntegrationAutosuggest extends React.Component {
     const url = template + repoMap[nextProps.match.params.repo];
 
     this.setState({ isLoading: true });
-    this.setState({ repoName: repoMap["repo3"] });
+    this.setState({ repoName: repoMap["repo4"] });
 
     fetch(url)
       .then(response => {
@@ -184,7 +191,7 @@ class IntegrationAutosuggest extends React.Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    this.setState({ repoName: repoMap["repo3"] });
+    this.setState({ repoName: repoMap["repo4"] });
 
     const url = template + this.state.repoName;
 
