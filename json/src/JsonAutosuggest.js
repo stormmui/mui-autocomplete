@@ -124,13 +124,19 @@ class IntegrationAutosuggest extends React.Component {
     };
   }
 
-  buildSuggestions() {
-    console.log("Building suggestion array");
-    console.log(this.state.data.hits);
+  buildSuggestions(value) {
+
+    const sug = this.state.data.hits;
+
+    console.log("Building suggestion value ", value);
+    console.log(sug);
+    sug.map((key, index) => (
+      console.log(index, key.location)
+    ));
   }
 
   getSuggestions(value) {
-    this.buildSuggestions();
+    this.buildSuggestions(value);
 
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
