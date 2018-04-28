@@ -14,6 +14,7 @@ import Table, {
 } from "material-ui/Table";
 import { withStyles } from "material-ui/styles";
 
+/*
 const suggestions = [
   { label: "Afghanistan" },
   { label: "Aland Islands" },
@@ -22,6 +23,7 @@ const suggestions = [
   { label: "Bouvet Island" },
   { label: "Brazil" }
 ];
+*/
 
 const template =
   "https://raw.githubusercontent.com/stormasm/mui-demos/master/table/src/data/";
@@ -126,6 +128,7 @@ class IntegrationAutosuggest extends React.Component {
 
   buildSuggestions(value) {
 
+    const sugary = [];
     const sug = this.state.data.hits;
 
     console.log("Building suggestion value ", value);
@@ -133,10 +136,20 @@ class IntegrationAutosuggest extends React.Component {
     sug.map((key, index) => (
       console.log(index, key.location)
     ));
+
+    sug.forEach(function(item, index){
+      console.log(index, item.location);
+      let obj = {};
+      obj.label = item.location;
+      sugary.push(obj);
+    });
+
+    return sugary;
   }
 
   getSuggestions(value) {
-    this.buildSuggestions(value);
+    const suggestions = this.buildSuggestions(value);
+    //console.log(ss);
 
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
