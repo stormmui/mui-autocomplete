@@ -14,6 +14,9 @@ import Table, {
 } from "material-ui/Table";
 import { withStyles } from "material-ui/styles";
 
+import GridList, { GridListTile } from "material-ui/GridList";
+import GhCard from "./Gh1Card";
+
 const template =
   "https://raw.githubusercontent.com/stormasm/mui-card-file/master/src/data/repos/";
 
@@ -100,6 +103,11 @@ const styles = theme => ({
     margin: 0,
     padding: 0,
     listStyleType: "none"
+  },
+  gridListSingleLine: {
+    flexWrap: "nowrap",
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: "translateZ(0)"
   }
 });
 
@@ -249,6 +257,17 @@ class IntegrationAutosuggest extends React.Component {
             }}
           />
         </div>
+
+        <div className={classes.root}>
+          <GridList className={classes.gridListSingleLine} cols={6}>
+            {hits.map(tile => (
+              <GridListTile key={tile.avatar} cols={tile.cols || 1}>
+                <GhCard tile={tile} />
+              </GridListTile>
+            ))}
+          </GridList>
+        </div>
+
         <div>
           <Paper className={classes.root}>
             <Table className={classes.table}>
