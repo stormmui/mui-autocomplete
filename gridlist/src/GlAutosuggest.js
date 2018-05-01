@@ -179,6 +179,10 @@ class IntegrationAutosuggest extends React.Component {
     });
   };
 
+  handleSuggestionSelected = () => {
+    console.log("Suggestion has been selected");
+  };
+
   componentWillReceiveProps(nextProps) {
     const url = template + repoMap[nextProps.match.params.repo];
 
@@ -246,6 +250,7 @@ class IntegrationAutosuggest extends React.Component {
             suggestions={this.state.suggestions}
             onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
             onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
+            onSuggestionSelected={this.handleSuggestionSelected}
             renderSuggestionsContainer={renderSuggestionsContainer}
             getSuggestionValue={getSuggestionValue}
             renderSuggestion={renderSuggestion}
