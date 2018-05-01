@@ -179,8 +179,11 @@ class IntegrationAutosuggest extends React.Component {
     });
   };
 
-  handleSuggestionSelected = () => {
-    console.log("Suggestion has been selected");
+  handleSuggestionSelected = (
+    event,
+    { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
+  ) => {
+    console.log("Suggestion has been selected ", suggestion);
   };
 
   componentWillReceiveProps(nextProps) {
