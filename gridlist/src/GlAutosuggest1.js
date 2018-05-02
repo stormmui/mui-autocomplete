@@ -15,7 +15,7 @@ import Table, {
 import { withStyles } from "material-ui/styles";
 
 import GridList, { GridListTile } from "material-ui/GridList";
-import GhCard from "./GhCard";
+import GhCard from "./GhCard1";
 
 /*
 OLD DATA SOURCE --- EVENTUALLY REMOVE
