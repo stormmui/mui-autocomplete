@@ -112,7 +112,7 @@ const styles = theme => ({
   }
 });
 
-class IntegrationAutosuggest extends React.Component {
+class GridListAutoSuggest extends React.Component {
   constructor(props) {
     super(props);
 
@@ -287,10 +287,6 @@ class IntegrationAutosuggest extends React.Component {
           />
         </div>
 
-        <Typography type="subheading" gutterBottom>
-          hitsug array length is {hitsug.length}
-        </Typography>
-
         <div className={classes.root}>
           <GridList className={classes.gridListSingleLine} cols={6}>
             {hitsug.map(tile => (
@@ -334,8 +330,8 @@ class IntegrationAutosuggest extends React.Component {
   }
 }
 
-IntegrationAutosuggest.propTypes = {
+GridListAutoSuggest.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(IntegrationAutosuggest);
+export default withStyles(styles)(GridListAutoSuggest);
