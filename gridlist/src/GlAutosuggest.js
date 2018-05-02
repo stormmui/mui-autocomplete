@@ -5,6 +5,7 @@ import match from "autosuggest-highlight/match";
 import parse from "autosuggest-highlight/parse";
 import TextField from "material-ui/TextField";
 import Paper from "material-ui/Paper";
+import Typography from "material-ui/Typography";
 import { MenuItem } from "material-ui/Menu";
 import Table, {
   TableBody,
@@ -119,6 +120,7 @@ class IntegrationAutosuggest extends React.Component {
       value: "",
       suggestions: [],
       data: {},
+      datasug: {},
       isLoading: false,
       error: null,
       repoName: repoMap[target_location]
@@ -137,6 +139,21 @@ class IntegrationAutosuggest extends React.Component {
       }
     });
     return sugary;
+  }
+
+  buildSuggestionsData(value) {
+    // Grab all of the objects in the array that match the location
+    const sugary = [];
+    const sug = this.state.data.hits;
+    sug.forEach(function(item, index) {
+      if (item.location === value) {
+        sugary.push(item);
+      }
+    });
+
+    const obj = {};
+    obj.hits = sugary;
+    return obj;
   }
 
   getSuggestions(value) {
@@ -184,6 +201,10 @@ class IntegrationAutosuggest extends React.Component {
     { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
   ) => {
     console.log("Suggestion has been selected ", suggestion);
+    const mydata = this.buildSuggestionsData(suggestion);
+    this.setState({
+      datasug: mydata
+    });
   };
 
   componentWillReceiveProps(nextProps) {
@@ -227,9 +248,11 @@ class IntegrationAutosuggest extends React.Component {
   }
 
   render() {
+    console.log("render was fired");
     const { classes } = this.props;
 
     const hits = this.state.data.hits || [];
+    const hitsug = this.state.datasug.hits || [];
 
     if (this.state.error) {
       return <p>{this.state.error.message}</p>;
@@ -266,9 +289,13 @@ class IntegrationAutosuggest extends React.Component {
           />
         </div>
 
+        <Typography type="subheading" gutterBottom>
+          hitsug array length is {hitsug.length}
+        </Typography>
+
         <div className={classes.root}>
           <GridList className={classes.gridListSingleLine} cols={6}>
-            {hits.map(tile => (
+            {hitsug.map(tile => (
               <GridListTile key={tile.avatar} cols={tile.cols || 1}>
                 <GhCard tile={tile} />
               </GridListTile>
