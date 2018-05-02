@@ -18,8 +18,14 @@ import { withStyles } from "material-ui/styles";
 import GridList, { GridListTile } from "material-ui/GridList";
 import GhCard from "./Gh1Card";
 
+/*
+OLD DATA SOURCE --- EVENTUALLY REMOVE
 const template =
   "https://raw.githubusercontent.com/stormasm/mui-card-file/master/src/data/repos/";
+*/
+
+const template =
+  "https://raw.githubusercontent.com/stormasm/ghdata/master/data1/";
 
 const repoMap = {
   repo1: "html5-node-diagram.json",
