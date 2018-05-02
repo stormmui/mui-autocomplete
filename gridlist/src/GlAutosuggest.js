@@ -146,7 +146,7 @@ class IntegrationAutosuggest extends React.Component {
     const sugary = [];
     const sug = this.state.data.hits;
     sug.forEach(function(item, index) {
-      if (item.location === value) {
+      if (item.location === value.label) {
         sugary.push(item);
       }
     });
@@ -200,7 +200,6 @@ class IntegrationAutosuggest extends React.Component {
     event,
     { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
   ) => {
-    console.log("Suggestion has been selected ", suggestion);
     const mydata = this.buildSuggestionsData(suggestion);
     this.setState({
       datasug: mydata
@@ -248,7 +247,6 @@ class IntegrationAutosuggest extends React.Component {
   }
 
   render() {
-    console.log("render was fired");
     const { classes } = this.props;
 
     const hits = this.state.data.hits || [];
