@@ -5,7 +5,6 @@ import match from "autosuggest-highlight/match";
 import parse from "autosuggest-highlight/parse";
 import TextField from "material-ui/TextField";
 import Paper from "material-ui/Paper";
-import Typography from "material-ui/Typography";
 import { MenuItem } from "material-ui/Menu";
 import Table, {
   TableBody,
@@ -24,6 +23,8 @@ const template =
   "https://raw.githubusercontent.com/stormasm/mui-card-file/master/src/data/repos/";
 */
 
+const num_of_item_dropdowns = 6;
+
 const template =
   "https://raw.githubusercontent.com/stormasm/ghdata/master/data1/";
 
@@ -31,10 +32,12 @@ const repoMap = {
   repo1: "html5-node-diagram.json",
   repo2: "ivy.json",
   repo3: "nodejs-sandboxed-fs.json",
-  repo4: "ghme.json"
+  repo4: "ghme.json",
+  repo5: "ghme5.json",
+  repo6: "ghme8.json"
 };
 
-const target_location = "repo1";
+const target_location = "repo6";
 
 function renderInput(inputProps) {
   const { classes, ref, ...other } = inputProps;
@@ -173,7 +176,7 @@ class GridListAutoSuggest extends React.Component {
       ? []
       : mysuggestions.filter(suggestion => {
           const keep =
-            count < 5 &&
+            count < num_of_item_dropdowns &&
             suggestion.label.toLowerCase().slice(0, inputLength) === inputValue;
 
           if (keep) {
