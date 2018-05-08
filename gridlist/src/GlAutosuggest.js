@@ -40,6 +40,16 @@ const repoMap = {
 
 const target_location = "repo1";
 
+const CustomTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
 function renderInput(inputProps) {
   const { classes, ref, ...other } = inputProps;
 
@@ -318,22 +328,22 @@ class GridListAutoSuggest extends React.Component {
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>
-                  <TableCell>login</TableCell>
-                  <TableCell>name</TableCell>
-                  <TableCell>location</TableCell>
+                  <CustomTableCell>login</CustomTableCell>
+                  <CustomTableCell>name</CustomTableCell>
+                  <CustomTableCell>location</CustomTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {hits.map((key, index) => {
                   return (
                     <TableRow key={index}>
-                      <TableCell>
+                      <CustomTableCell>
                         <a href={"https://github.com/" + key.login}>
                           {key.login}
                         </a>
-                      </TableCell>
-                      <TableCell>{key.name}</TableCell>
-                      <TableCell>{key.location}</TableCell>
+                      </CustomTableCell>
+                      <CustomTableCell>{key.name}</CustomTableCell>
+                      <CustomTableCell>{key.location}</CustomTableCell>
                     </TableRow>
                   );
                 })}
