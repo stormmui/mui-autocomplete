@@ -15,7 +15,8 @@ import Table, {
 import { withStyles } from "material-ui/styles";
 
 import GridList, { GridListTile } from "material-ui/GridList";
-import GhCard from "./GhCard";
+import GhCard from "./Gh3Card";
+import lightGreen from "material-ui/colors/lightGreen";
 
 /*
 OLD DATA SOURCE --- EVENTUALLY REMOVE
@@ -117,7 +118,9 @@ const styles = theme => ({
   gridListSingleLine: {
     flexWrap: "nowrap",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: "translateZ(0)"
+    transform: "translateZ(0)",
+    backgroundColor: lightGreen[100]
+    //backgroundColor: theme.palette.background.paper
   }
 });
 
@@ -297,7 +300,11 @@ class GridListAutoSuggest extends React.Component {
         </div>
 
         <div className={classes.root}>
-          <GridList className={classes.gridListSingleLine} cols={6}>
+          <GridList
+            cellHeight={250}
+            className={classes.gridListSingleLine}
+            cols={6}
+          >
             {hitsug.map(tile => (
               <GridListTile key={tile.avatar} cols={tile.cols || 1}>
                 <GhCard tile={tile} />
