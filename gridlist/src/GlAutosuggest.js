@@ -16,7 +16,7 @@ import { withStyles } from "material-ui/styles";
 
 import GridList, { GridListTile } from "material-ui/GridList";
 import GhCard from "./Gh3Card";
-import lightGreen from "material-ui/colors/lightGreen";
+//import lightGreen from "material-ui/colors/lightGreen";
 
 /*
 OLD DATA SOURCE --- EVENTUALLY REMOVE
@@ -38,7 +38,7 @@ const repoMap = {
   repo6: "ghme8.json"
 };
 
-const target_location = "repo6";
+const target_location = "repo1";
 
 function renderInput(inputProps) {
   const { classes, ref, ...other } = inputProps;
@@ -119,8 +119,8 @@ const styles = theme => ({
     flexWrap: "nowrap",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: "translateZ(0)",
-    backgroundColor: lightGreen[100]
-    //backgroundColor: theme.palette.background.paper
+    //backgroundColor: lightGreen[100]
+    backgroundColor: theme.palette.background.paper
   }
 });
 
