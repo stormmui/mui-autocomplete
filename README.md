@@ -1,4 +1,17 @@
 
+June 6, 2018
+
+See the gridlist directory...
+
+This is the final version of code with
+[react-autosuggest](https://github.com/moroshko/react-autosuggest)
+that has a drop down of locations with data below it inside a
+[Material-ui table](https://material-ui.com/demos/tables/#tables)
+
+This code will be migrated along with
+[mui-cardfile](https://github.com/stormasm/mui-card-file)
+over to a new repo with combined functionality.
+
 This demo is based on:
 [react-autosuggest](https://github.com/moroshko/react-autosuggest),
 [autosuggest-highlight](https://github.com/moroshko/autosuggest-highlight)
